@@ -1,4 +1,4 @@
-﻿/**
+/**
  * This is the file where the bot commands are located
  *
  * @license MIT license
@@ -20,7 +20,7 @@ exports.commands = {
 		} else {
 			var text = '/pm ' + by + ', ';
 		}
-		text += '**Pokémon Showdown Bot** by: Quinella and TalkTakesTime';
+		text += 'This Bot is made by **Bryan AA** (Forked from TalkTakesTime and Quinella Bot).';
 		this.say(con, room, text);
 	},
 	help: 'guide',
@@ -33,7 +33,7 @@ exports.commands = {
 		if (config.botguide) {
 			text += 'A guide on how to use this bot can be found here: ' + config.botguide;
 		} else {
-			text += 'There is no guide for this bot. PM the owner with any questions.';
+			text += 'There is no guide for this bot. PM **Bryan AA** for any question.';
 		}
 		this.say(con, room, text);
 	},
@@ -95,7 +95,9 @@ exports.commands = {
 			choose: 1,
 			usagestats: 1,
 			buzz: 1,
-			helix: 1,
+			helix: 1, 
+			whois: 1, 
+			penislength: 1,
 			survivor: 1,
 			games: 1,
 			wifi: 1,
@@ -407,11 +409,11 @@ exports.commands = {
 	},
 	tell: 'say',
 	say: function(arg, by, room, con) {
-		if (!this.canUse('say', room, by)) return false;
-		this.say(con, room, stripCommands(arg) + ' (' + by + ' said this)');
+		if (!this.canUse('say', room, by)) return true;
+		this.say(con, room, stripCommands(arg) + ' ');
 	},
 	joke: function(arg, by, room, con) {
-		if (!this.canUse('joke', room, by) || room.charAt(0) === ',') return false;
+		if (!this.canUse('joke', room, by) || room.charAt(0) === ',') return true;
 		var self = this;
 
 		var reqOpt = {
@@ -430,7 +432,7 @@ exports.commands = {
 			});
 		});
 		req.end();
-	},
+	}, 
 	choose: function(arg, by, room, con) {
 		if (arg.indexOf(',') === -1) {
 			var choices = arg.split(' ');
@@ -501,8 +503,70 @@ exports.commands = {
 			case 20: text += "Don't count on it."; break;
 		}
 		this.say(con, room, text);
-	},
+	}, 
+	whois: function(arg, by, room, con) {
+		if (this.canUse('whois', room, by) || room.charAt(0) === ',') {
+			var text = '';
+		} else {
+			var text = '/pm ' + by + ', ';
+		}
 
+		var rand = Math.floor(20 * Math.random()) + 1;
+
+		switch (rand) {
+	 		case 1: text += "Just another Pokemon Showdown user."; break;
+	  		case 2: text += "A very good competetive pokemon player."; break;
+			case 3: text += "A worthy opponent."; break;
+			case 4: text += "Generally, a bad user."; break;
+			case 5: text += "Generally, a good user."; break;
+			case 6: text += "Someone who is better than you."; break;
+			case 7: text += "An amazing person."; break;
+			case 8: text += "A beautiful person."; break;
+			case 9: text += "An experienced coder."; break;
+			case 10: text += "A leader."; break;
+			case 11: text += "A Mediocre Player."; break;
+			case 12: text += "An excellent person."; break;
+			case 13: text += "Someone with love inside."; break;
+			case 14: text += "An annoying person."; break;
+			case 15: text += "A good coder."; break;
+			case 16: text += "A bad coder."; break; 
+			case 17: text += "A nerd."; break;
+		}
+		this.say(con, room, text);  
+	},
+		bryan: function(arg, by, room, con) {
+		if (this.hasRank(by, '#~') || room.charAt(0) === ',') {
+			var text = '';
+		} else {
+			var text = '/pm ' + by + ', ';
+		}
+		text += 'User: **Bryan AA** is my owner.';
+		this.say(con, room, text);
+	}, 
+	penislength: function(arg, by, room, con) {
+		if (this.canUse('penislength', room, by) || room.charAt(0) === ',') {
+			var text = '';
+		} else {
+			var text = '/pm ' + by + ', ';
+		}
+
+		var rand = Math.floor(20 * Math.random()) + 1;
+
+		switch (rand) {
+	 		case 1: text += "Te mide 8.5 centimetros."; break;
+	  		case 2: text += "Te mide .... que es eso?."; break;
+			case 3: text += "Te mide 5.0 centimetros."; break;
+			case 4: text += "Te mide 10.0 centimetros O_O Dios mio."; break;
+			case 5: text += "Te mide 7.5 centimetros."; break;
+			case 6: text += "DIOS, **QUE GRANDE**."; break;
+			case 7: text += "Te mide ...**JAJAJAJA** que es eso?."; break;
+			case 8: text += "Amigo, que pequeña."; break;
+			case 9: text += "Te mide 3.8 centimetros."; break;
+			case 10: text += "La de **Bryan AA** es mejor."; break;
+		}
+		this.say(con, room, text);  
+	},
+ 
 	/**
 	 * Room specific commands
 	 *
