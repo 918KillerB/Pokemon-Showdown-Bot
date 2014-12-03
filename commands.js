@@ -113,7 +113,7 @@ exports.commands = {
 			flooding: 1,
 			caps: 1,
 			stretching: 1,
-			bannedwords: 1,
+			bannedwords: 2,
 			snen: 1
 		};
 
